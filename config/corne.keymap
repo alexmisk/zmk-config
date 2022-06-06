@@ -25,11 +25,13 @@
 
 // Misc mac shortcuts
 #define ALFRED LG(SPACE) // Toggle Alfred
-#define TYPOGR LS(LG((T))) // Fire ALS Typograph workflow
+#define SEARCH LS(LG((T))) // Fire Safafi with search engine
 #define ADD_TSK LC(LS(LA(LG(A)))) // Add task via Todoist
 #define CLIPBRD LC(LS(LA(LG(J)))) // Show Alfred clipboard
 #define SCRSHT LS(LG((N4))) // Make a screenshot
 #define TIMER LC(LS(LA(LG(T)))) // Toggle Tyme2
+#define TERMINAL LC(F18) // Toggle Terminal
+#define SAFARI LA(F18) // Toggle Safari
 
 // Player shortcuts
 #define PREV C_PREVIOUS
@@ -54,21 +56,34 @@
 #define RUDOT LS(N7)
 
 / {
-        keymap {
+
+    behaviors {
+        hm: homerow_mods {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HOMEROW_MODS";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <0>;
+            flavor = "tap-preferred";
+            bindings = <&kp>, <&kp>;
+    };
+        };
+
+     keymap {
                 compatible = "zmk,keymap";
 
                 default_layer {
                         bindings = <
    &kp ESC   &kp Q &kp W &kp E &kp R &kp T   &kp Y &kp U  &kp I     &kp O   &kp P    &kp LEFT_BRACKET
-   &mt LCTRL TAB &kp A &kp S &kp D &kp F &kp G   &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
+   &mt &caps_word TAB &hm LCTRL A &hm LALT S &hm LGUI D &hm LSHIFT F &kp G   &kp H &hm LSHIFT J  &hm LGUI K &hm LALT L &hm LCTRL SEMI &kp SQT
    &mt LSHFT LPAR &kp Z &kp X &kp C &kp V &kp B   &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &mt RSHFT RPAR
-                  &kp LGUI &mo LOWER &kp RET   &kp SPACE &mo RAISE &kp RALT
+                  &caps_word &lt LOWER ALFRED &kp RET   &kp SPACE &mo RAISE &kp SAFARI
                         >;
                 };
 
                 lower_layer {
                         bindings = <
-&kp TIMER   &kp TYPOGR   &kp ADD_TSK   &kp CLIPBRD   &kp SCRSHT   &kp CURLL   &kp CURLR   &kp KP_N7   &kp KP_N8   &kp KP_N9   &kp KP_MINUS   &kp KP_SLASH
+&kp TIMER   &kp SEARCH   &kp ADD_TSK   &kp CLIPBRD   &kp SCRSHT   &kp CURLL   &kp CURLR   &kp KP_N7   &kp KP_N8   &kp KP_N9   &kp KP_MINUS   &kp KP_SLASH
 &kp PREV   &kp NEXT   &kp VOL_DN   &kp PLAY   &kp VOL_UP   &kp RUCOMMA   &kp RUDOT   &kp KP_N4   &kp KP_N5   &kp KP_N6   &kp KP_PLUS   &kp KP_ASTERISK
 &trans   &kp SEL_ALL   &kp CUT   &kp COPY   &kp PASTE   &kp MINUS   &kp EQUAL   &kp KP_N1   &kp KP_N2   &kp KP_N3   &kp KP_EQUAL   &kp KP_DOT
        &trans   &trans   &trans   &trans   &kp KP_N0   &trans 
